@@ -1,0 +1,11 @@
+举例例子介绍如何使用Python 进行unittest。
+
+demo 测试所使用的接口：
+http://finance.yahoo.com/d/quotes.csv?e=.csv&f=sl1d1t1&s=USDCNY=x
+这个接口用以进行不同汇率直接的汇率转换查询。
+
+测试思路:
+待测方法： search(fromCurrency, toCurrency)
+输入两个币种代号，如 USD 和 CNY ， 分别查询 USD 到 CNY 和 CNY 到 USD 的汇率。
+验证： 如果两个汇率相乘，在取3位小数近似值的时候等于1， 则认为测试通过； 否则，测试失败。
+self.assertEqual(round(search(fromCurrency, toCurrency)*search( toCurrency,fromCurrency),2),1, msg='the currency rate is wrong')
